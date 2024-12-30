@@ -26,7 +26,7 @@ void setup() {
 
 void draw() {
   int elapsedTime = (millis() - startTime) / 1000; // Time in seconds
-  if (elapsedTime > 72) {
+  if (elapsedTime > 98) {
     exit();
   }
   int idx = min(elapsedTime / 30, pointSizes.length - 1); // Ensure index is within bounds
@@ -42,4 +42,6 @@ void draw() {
 
   // Draw the point
   circle(x, y, pointSize);
+  
+  saveFrame("frames/####.tif");
 }
