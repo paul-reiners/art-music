@@ -1,39 +1,39 @@
 /**
  * Brain Pointillism
- * by Paul Reiners. 
+ * by Paul Reiners.
  * Animates Maryam's painting of a brain.
  */
- 
+
 PImage img;
 int[] pointSizes = {32, 16, 8, 4, 2, 1};
 int startTime;
+int totalAnimationTime = 360; // Animation duration in seconds
 
 void setup() {
   size(274, 216);
   img = loadImage("../data/art/derived/brain_black_bck.png");
-  startTime = millis(); // Record the start time
-  noStroke(); // Turn off stroke for pointillism effect
-  frameRate(30); // Set the frame rate to 30 FPS for smooth animation
+  startTime = millis();
+  noStroke();
+  frameRate(30);
 }
 
 void draw() {
   int elapsedTime = (millis() - startTime) / 1000; // Time in seconds
-  if (elapsedTime > 360) {
-    exit();
+  if (elapsedTime > totalAnimationTime) {
+    exit(); // Exit after 6 minutes (360 seconds)
   }
-  int idx = min(elapsedTime / 60, pointSizes.length - 1); // Ensure index is within bounds
+  
+  int idx = min(elapsedTime / 60, pointSizes.length - 1); // Choose point size based on elapsed time
   int pointSize = pointSizes[idx];
 
-  // Randomly select coordinates from the image
+  // Randomly pick a coordinate and retrieve the pixel color
   int x = int(random(img.width));
   int y = int(random(img.height));
-
-  // Get pixel color from the image
   color pixelColor = img.get(x, y);
-  fill(pixelColor, 128); // Apply color with some transparency
 
-  // Draw the point
+  // Draw point with transparency
+  fill(pixelColor, 128);
   circle(x, y, pointSize);
-  
+
   saveFrame("frames/#####.tif");
 }
