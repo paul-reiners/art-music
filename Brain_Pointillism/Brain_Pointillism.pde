@@ -4,14 +4,6 @@
  * Animates Maryam's painting of a brain.
  */
  
-//TODO Further Enhancements:
-//Efficiency with Precomputed Points:
-
-//If you want to speed up the animation for many points, you could create a list of precomputed random coordinates and loop through them. This would allow you to avoid recalculating random values for every frame, which can be a performance hit. But this is more of an optimization for when you scale up your project.
-//Smooth Animation (Optional):
-
-//If you want to control the animation speed, consider adjusting frameRate() or implementing a custom timing mechanism (e.g., frameCount).
-
 PImage img;
 int[] pointSizes = {32, 16, 8, 4, 2, 1};
 int startTime;
@@ -26,10 +18,10 @@ void setup() {
 
 void draw() {
   int elapsedTime = (millis() - startTime) / 1000; // Time in seconds
-  if (elapsedTime > 98) {
+  if (elapsedTime > 360) {
     exit();
   }
-  int idx = min(elapsedTime / 30, pointSizes.length - 1); // Ensure index is within bounds
+  int idx = min(elapsedTime / 60, pointSizes.length - 1); // Ensure index is within bounds
   int pointSize = pointSizes[idx];
 
   // Randomly select coordinates from the image
@@ -43,5 +35,5 @@ void draw() {
   // Draw the point
   circle(x, y, pointSize);
   
-  saveFrame("frames/####.tif");
+  saveFrame("frames/#####.tif");
 }
